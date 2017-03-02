@@ -7,8 +7,20 @@ try {
 Import-Module SharePointPnPPowerShell2013 -ErrorAction Stop | Out-Null
 }
 catch {
-Write-Host "You must install the PnP PowerShell 2013 module" 
+Write-Host "`nYou must install the PnP PowerShell 2013 module first to use this module" -BackgroundColor DarkRed -ForegroundColor White
+if ($PSVersionTable.PSVersion.Major -ge 5) {
+Write-Host "Run "  -NoNewline 
+Write-Host "Install-Module SharePointPnPPowerShell2013 -AllowClobber"  -BackgroundColor Yellow -ForegroundColor Black -NoNewline
+Write-Host " to install`n" 
 }
+else {
+Write-Host "Vist " -NoNewline #-BackgroundColor Yellow -ForegroundColor Black
+Write-Host "https://github.com/SharePoint/PnP-PowerShell "  -BackgroundColor Yellow -ForegroundColor Black -NoNewline
+Write-Host "for install instructions" #-BackgroundColor Yellow -ForegroundColor Black
+}
+break
+} 
+
 
 $creds = (Get-Credential)
 Connect-PnPOnline -Url "https://one.mskcc.org/sites/pub/is/" -Credentials $creds
