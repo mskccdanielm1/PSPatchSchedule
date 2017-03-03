@@ -25,6 +25,7 @@ break
 $creds = (Get-Credential)
 Connect-PnPOnline -Url "https://one.mskcc.org/sites/pub/is/" -Credentials $creds
 $list = Get-PnPList -Identity "6f1bac24-64ea-45e0-8bc0-392a8c1d2ca5"
+$list = (Get-PnPListItem 3da52f16-333f-4b94-b881-87706a90f0d8 -Id 207)
 $context = (get-PnPcontext)
 $web = $context.web
 
