@@ -10,7 +10,7 @@ catch {
 Write-Host "`nYou must install the PnP PowerShell 2013 module first to use this module" -BackgroundColor DarkRed -ForegroundColor White
 if ($PSVersionTable.PSVersion.Major -ge 5) {
 Write-Host "Run "  -NoNewline 
-Write-Host "Install-Module SharePointPnPPowerShell2013 -AllowClobber"  -BackgroundColor Yellow -ForegroundColor Black -NoNewline
+Write-Host "Install-Module SharePointPnPPowerShell2013 -Scope CurrentUser"  -BackgroundColor Yellow -ForegroundColor Black -NoNewline
 Write-Host " to install`n" 
 }
 else {
