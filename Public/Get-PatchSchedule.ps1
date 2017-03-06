@@ -25,7 +25,7 @@ break
 $creds = (Get-Credential)
 Connect-PnPOnline -Url "https://one.mskcc.org/sites/pub/is/" -Credentials $creds
 $list = Get-PnPList -Identity "6f1bac24-64ea-45e0-8bc0-392a8c1d2ca5"
-$list = (Get-PnPListItem 3da52f16-333f-4b94-b881-87706a90f0d8 -Id 207)
+#$list = (Get-PnPListItem 3da52f16-333f-4b94-b881-87706a90f0d8 -Id 207)
 $context = (get-PnPcontext)
 $web = $context.web
 
@@ -43,8 +43,9 @@ $Results = @()
 foreach ($item in $items) {
 
 $item = ($item.fieldvalues)
-#write-host $item.Title
 
+#write-host $item.Title
+<#
 $PatchSplat = @{ 
     Property=( 
         'Server', 
@@ -55,7 +56,7 @@ $PatchSplat = @{
         'Patch Phase', 
         'Current Patch Slot', 
         'Custom Schedule Details' 
-    )} 
+    )} #>
 
 
 $patchinfo = [pscustomobject][ordered]@{ 
@@ -67,11 +68,12 @@ $patchinfo = [pscustomobject][ordered]@{
     'Patch Phase'=($item).Patch_x0020_Phase1.LookupValue
     'Current Patch Slot'=($item).Current_x0020_Patch_x0020_Slot
     'Custom Schedule Details'=($item).Custom_x0020_Schedule_x0020_Deta
-      } | Select-Object @SelectSplat 
+      } #| Select-Object @SelectSplat 
 
 $Results += $patchinfo
 
 }
 
+#($Results).Count
 $Results | ConvertTo-Json
 }
