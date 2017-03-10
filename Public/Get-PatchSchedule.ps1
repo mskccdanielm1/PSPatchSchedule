@@ -1,5 +1,12 @@
 function Get-PatchSchedule {
 
+param(
+
+[switch]
+$OutJSON
+
+)
+
 
 # Full item url https://one.mskcc.org/sites/pub/is/Pages/tr/Patching-Schedule.aspx
 
@@ -75,7 +82,11 @@ $Results += $patchinfo
 
 }
 
-#($Results).Count
-#$Results  | ConvertTo-Json
+
+if ($OutJSON) {
+$Results  | ConvertTo-Json
+}
+else {
 $Results  | ConvertTo-Csv -NoTypeInformation | Out-File .\patches.csv
+}
 }
